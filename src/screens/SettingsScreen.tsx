@@ -45,12 +45,12 @@ export default function SettingsScreen() {
 
   const handleDelete = (counter: Counter) => {
     Alert.alert(
-      'Excluir contador',
-      `Tem certeza que deseja excluir "${counter.name}"?`,
+      'Delete counter',
+      `Are you sure you want to delete "${counter.name}"?`,
       [
-        {text: 'Cancelar', style: 'cancel'},
+        {text: 'Cancel', style: 'cancel'},
         {
-          text: 'Excluir',
+          text: 'Delete',
           style: 'destructive',
           onPress: () => removeCounter(counter.id),
         },
@@ -79,19 +79,19 @@ export default function SettingsScreen() {
             <TouchableOpacity
               style={styles.smallButton}
               onPress={handleConfirmEdit}>
-              <Text style={styles.smallButtonText}>Salvar</Text>
+              <Text style={styles.smallButtonText}>Save</Text>
             </TouchableOpacity>
           ) : (
             <TouchableOpacity
               style={styles.smallButton}
               onPress={() => handleStartEdit(item)}>
-              <Text style={styles.smallButtonText}>Renomear</Text>
+              <Text style={styles.smallButtonText}>Rename</Text>
             </TouchableOpacity>
           )}
           <TouchableOpacity
             style={[styles.smallButton, styles.deleteButton]}
             onPress={() => handleDelete(item)}>
-            <Text style={styles.deleteButtonText}>Excluir</Text>
+            <Text style={styles.deleteButtonText}>Delete</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -103,26 +103,26 @@ export default function SettingsScreen() {
       style={styles.flex}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <SafeAreaView style={styles.container}>
-        <Text style={styles.title}>Configurar Contadores</Text>
+        <Text style={styles.title}>Configure Counters</Text>
 
         <View style={styles.addRow}>
           <TextInput
             style={styles.addInput}
-            placeholder="Nome do contador (ex: Copos de água)"
+            placeholder="Counter name (e.g. Glasses of water)"
             value={newName}
             onChangeText={setNewName}
             onSubmitEditing={handleAdd}
             returnKeyType="done"
           />
           <TouchableOpacity style={styles.addButton} onPress={handleAdd}>
-            <Text style={styles.addButtonText}>Adicionar</Text>
+            <Text style={styles.addButtonText}>Add</Text>
           </TouchableOpacity>
         </View>
 
         {counters.length === 0 ? (
           <View style={styles.empty}>
             <Text style={styles.emptyText}>
-              Você ainda não criou nenhum contador.
+              You haven't created any counters yet.
             </Text>
           </View>
         ) : (

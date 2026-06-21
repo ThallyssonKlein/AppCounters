@@ -20,11 +20,11 @@ export default function HomeScreen({navigation}: Props) {
 
   const handleResetAll = () => {
     Alert.alert(
-      'Resetar todos os contadores',
-      'Tem certeza que deseja zerar todos os contadores?',
+      'Reset all counters',
+      'Are you sure you want to reset all counters?',
       [
-        {text: 'Cancelar', style: 'cancel'},
-        {text: 'Resetar', style: 'destructive', onPress: resetAll},
+        {text: 'Cancel', style: 'cancel'},
+        {text: 'Reset', style: 'destructive', onPress: resetAll},
       ],
     );
   };
@@ -51,18 +51,18 @@ export default function HomeScreen({navigation}: Props) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.title}>Meus Contadores</Text>
+        <Text style={styles.title}>My Counters</Text>
         <TouchableOpacity
           style={styles.settingsButton}
           onPress={() => navigation.navigate('Settings')}>
-          <Text style={styles.settingsButtonText}>Configurar</Text>
+          <Text style={styles.settingsButtonText}>Configure</Text>
         </TouchableOpacity>
       </View>
       {counters.length === 0 ? (
         <View style={styles.empty}>
           <Text style={styles.emptyText}>
-            Nenhum contador ainda. Toque em "Configurar" para criar o
-            primeiro.
+            No counters yet. Tap "Configure" to create the first
+            one.
           </Text>
         </View>
       ) : (
@@ -78,7 +78,7 @@ export default function HomeScreen({navigation}: Props) {
           <TouchableOpacity
             style={styles.resetButton}
             onPress={handleResetAll}>
-            <Text style={styles.resetButtonText}>Resetar todos</Text>
+            <Text style={styles.resetButtonText}>Reset all</Text>
           </TouchableOpacity>
         </View>
       )}

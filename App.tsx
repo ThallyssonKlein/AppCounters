@@ -43,7 +43,7 @@ function App() {
             <Stack.Screen
               name="Settings"
               component={SettingsScreen}
-              options={{title: 'Configurar Contadores'}}
+              options={{title: 'Configure Counters'}}
             />
           </Stack.Navigator>
         </NavigationContainer>
