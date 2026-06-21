@@ -19,6 +19,7 @@ type CountersContextValue = {
   renameCounter: (id: string, name: string) => void;
   increment: (id: string) => void;
   decrement: (id: string) => void;
+  resetAll: () => void;
 };
 
 const CountersContext = createContext<CountersContextValue | undefined>(
@@ -80,6 +81,10 @@ export function CountersProvider({children}: {children: React.ReactNode}) {
     );
   }, []);
 
+  const resetAll = useCallback(() => {
+    setCounters(prev => prev.map(counter => ({...counter, value: 0})));
+  }, []);
+
   const value = useMemo(
     () => ({
       counters,
@@ -89,8 +94,18 @@ export function CountersProvider({children}: {children: React.ReactNode}) {
       renameCounter,
       increment,
       decrement,
+      resetAll,
     }),
-    [counters, isLoading, addCounter, removeCounter, renameCounter, increment, decrement],
+    [
+      counters,
+      isLoading,
+      addCounter,
+      removeCounter,
+      renameCounter,
+      increment,
+      decrement,
+      resetAll,
+    ],
   );
 
   return (

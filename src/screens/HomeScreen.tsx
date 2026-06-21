@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   SafeAreaView,
+  Alert,
 } from 'react-native';
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {useCounters} from '../context/CountersContext';
@@ -15,7 +16,18 @@ import type {RootStackParamList} from '../../App';
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 export default function HomeScreen({navigation}: Props) {
-  const {counters, increment, decrement} = useCounters();
+  const {counters, increment, decrement, resetAll} = useCounters();
+
+  const handleResetAll = () => {
+    Alert.alert(
+      'Resetar todos os contadores',
+      'Tem certeza que deseja zerar todos os contadores?',
+      [
+        {text: 'Cancelar', style: 'cancel'},
+        {text: 'Resetar', style: 'destructive', onPress: resetAll},
+      ],
+    );
+  };
 
   const renderItem = ({item}: {item: Counter}) => (
     <View style={styles.card}>
@@ -61,6 +73,15 @@ export default function HomeScreen({navigation}: Props) {
           contentContainerStyle={styles.list}
         />
       )}
+      {counters.length > 0 && (
+        <View style={styles.footer}>
+          <TouchableOpacity
+            style={styles.resetButton}
+            onPress={handleResetAll}>
+            <Text style={styles.resetButtonText}>Resetar todos</Text>
+          </TouchableOpacity>
+        </View>
+      )}
     </SafeAreaView>
   );
 }
@@ -92,6 +113,23 @@ const styles = StyleSheet.create({
   settingsButtonText: {
     color: '#1C1C1E',
     fontWeight: '600',
+  },
+  footer: {
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderTopWidth: 1,
+    borderTopColor: '#E5E5EA',
+  },
+  resetButton: {
+    paddingVertical: 12,
+    borderRadius: 10,
+    backgroundColor: '#FFE5E5',
+    alignItems: 'center',
+  },
+  resetButtonText: {
+    color: '#FF3B30',
+    fontWeight: '700',
+    fontSize: 16,
   },
   list: {
     padding: 16,
